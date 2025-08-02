@@ -1,27 +1,30 @@
 {
   "name": "desktop",
   "version": "0.0.0",
+  "description": "IndieStack Desktop App - Cross-platform productivity application",
+  "author": "IndieStack Team",
   "main": "dist/main.js",
   "scripts": {
     "dev": "concurrently \"yarn dev:electron\" \"yarn dev:web\"",
     "dev:desktop": "concurrently \"yarn dev:electron\" \"yarn dev:web\"",
     "dev:electron": "electron-builder install-app-deps && electron .",
     "dev:web": "cd ../web && yarn dev",
-    "build": "yarn build:web && yarn build:electron",
-    "build:desktop": "yarn build:web && yarn build:electron",
+    "build": "yarn build:web && yarn build:main && yarn build:electron",
+    "build:desktop": "yarn build:web && yarn build:main && yarn build:electron",
     "build:web": "cd ../web && yarn build",
+    "build:main": "tsc",
     "build:electron": "electron-builder",
     "lint": "echo 'No linting configured'",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist build"
   },
   "dependencies": {
-    "electron-updater": "^6.1.7",
-    "electron": "^28.1.0"
+    "electron-updater": "^6.1.7"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "electron-builder": "^24.9.1",
+    "electron": "28.1.0",
     "@types/node": "^18.17.0",
     "typescript": "~5.0.3"
   },
