@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { initializeRevenueCat, getOfferings, purchasePackage } from '@indiestack/subscription';
-import { useCurrentUser } from '@convex-dev/auth/react';
+import { useCurrentUser } from '@indiestack/auth';
 
 export default function SubscriptionManager() {
   const user = useCurrentUser();

@@ -11,7 +11,6 @@ function createWindow(): void {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      enableRemoteModule: false,
     },
     titleBarStyle: 'hiddenInset',
     show: false,

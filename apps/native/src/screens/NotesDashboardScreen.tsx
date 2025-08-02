@@ -11,14 +11,14 @@ import {
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
-import { useAuth, useUser } from "@clerk/clerk-expo";
+import { useCurrentUser } from '@indiestack/auth';
 import { api } from "@packages/backend/convex/_generated/api";
 import { useQuery } from "convex/react";
 
 const NotesDashboardScreen = ({ navigation }) => {
-  const user = useUser();
-  const imageUrl = user?.user?.imageUrl;
-  const firstName = user?.user?.firstName;
+  const user = useCurrentUser();
+  const imageUrl = user?.image;
+  const firstName = user?.name?.split(' ')[0];
 
   const allNotes = useQuery(api.notes.getNotes);
   const [search, setSearch] = useState("");
