@@ -1,10 +1,10 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "../convex/_generated/api";
-import { Auth } from "convex/server";
+import { getAuthUserId } from "@convex-dev/auth/server";
 
-export const getUserId = async (ctx: { auth: Auth }) => {
-  return (await ctx.auth.getUserIdentity())?.subject;
+export const getUserId = async (ctx: any) => {
+  return await getAuthUserId(ctx);
 };
 
 // Get all notes for a specific user

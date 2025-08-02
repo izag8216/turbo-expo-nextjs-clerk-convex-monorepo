@@ -1,0 +1,23 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache \
+    xvfb \
+    gtk+3.0-dev \
+    libxss1 \
+    gconf-service \
+    libasound2 \
+    libatk1.0-0 \
+    libc6 \
+    libcairo-gobject2 \
+    libdrm2 \
+    libgtk-3-0 \
+    libgdk-pixbuf2.0-0
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "dev"]

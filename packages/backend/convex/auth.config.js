@@ -1,8 +1,16 @@
-export default {
+import { convexAuth } from "@convex-dev/auth/server";
+import Google from "@auth/core/providers/google";
+import Apple from "@auth/core/providers/apple";
+
+export default convexAuth({
   providers: [
-    {
-      domain: process.env.CLERK_ISSUER_URL,
-      applicationID: "convex",
-    },
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    }),
+    Apple({
+      clientId: process.env.AUTH_APPLE_ID,
+      clientSecret: process.env.AUTH_APPLE_SECRET,
+    }),
   ],
-};
+});

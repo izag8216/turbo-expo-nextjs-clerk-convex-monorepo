@@ -2,7 +2,7 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import { authTables } from "@convex-dev/auth/server";
 
-export default defineSchema({
+export const schema = defineSchema({
   ...authTables,
   notes: defineTable({
     userId: v.id("users"),
@@ -21,3 +21,5 @@ export default defineSchema({
     cancelAtPeriodEnd: v.optional(v.boolean()),
   }).index("by_user", ["userId"]).index("by_stripe_customer", ["stripeCustomerId"]),
 });
+
+export default schema;

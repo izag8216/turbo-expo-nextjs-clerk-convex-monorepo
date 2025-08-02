@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_CONVEX_URL=${NEXT_PUBLIC_CONVEX_URL}
+      - AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}
+      - AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+    restart: unless-stopped
+
+  native:
+    build:
+      context: ./apps/native
+      dockerfile: Dockerfile.dev
+    ports:
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+    volumes:
+      - ./apps/native:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - EXPO_PUBLIC_CONVEX_URL=${EXPO_PUBLIC_CONVEX_URL}
+      - AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}
+      - AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}
+      - REVENUECAT_API_KEY=${REVENUECAT_API_KEY}
+    restart: unless-stopped
+
+  desktop:
+    build:
+      context: ./apps/desktop
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./apps/desktop:/app
+      - /app/node_modules
+      - /app/dist
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    depends_on:
+      - web

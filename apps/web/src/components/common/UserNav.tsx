@@ -1,4 +1,4 @@
-import { useClerk } from "@clerk/clerk-react";
+import { useAuthActions } from "@convex-dev/auth/react";
 import { LogOut, Paintbrush2 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
@@ -21,7 +21,7 @@ export function UserNav({
   name: string;
   email: string;
 }) {
-  const { signOut } = useClerk();
+  const { signOut } = useAuthActions();
 
   return (
     <DropdownMenu>

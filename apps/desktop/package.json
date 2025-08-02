@@ -1,0 +1,47 @@
+{
+  "name": "desktop",
+  "version": "0.0.0",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:electron\" \"npm run dev:web\"",
+    "dev:desktop": "concurrently \"npm run dev:electron\" \"npm run dev:web\"",
+    "dev:electron": "electron-builder install-app-deps && electron .",
+    "dev:web": "cd ../web && npm run dev",
+    "build": "npm run build:web && npm run build:electron",
+    "build:desktop": "npm run build:web && npm run build:electron",
+    "build:web": "cd ../web && npm run build",
+    "build:electron": "electron-builder",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist build"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.7"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "@types/node": "^18.17.0",
+    "typescript": "~5.0.3"
+  },
+  "build": {
+    "appId": "com.indiestack.desktop",
+    "productName": "IndieStack",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

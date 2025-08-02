@@ -1,31 +1,20 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { useOAuth } from "@clerk/clerk-expo";
+import { useAuthActions } from "@convex-dev/auth/react";
 import { AntDesign } from "@expo/vector-icons";
 
 const LoginScreen = ({ navigation }) => {
-  const { startOAuthFlow: startGoogleAuthFlow } = useOAuth({
-    strategy: "oauth_google",
-  });
-  const { startOAuthFlow: startAppleAuthFlow } = useOAuth({
-    strategy: "oauth_apple",
-  });
+  const { signIn } = useAuthActions();
 
   const onPress = async (authType: string) => {
     try {
       if (authType === "google") {
-        const { createdSessionId, setActive } = await startGoogleAuthFlow();
-        if (createdSessionId) {
-          setActive({ session: createdSessionId });
-          navigation.navigate("NotesDashboardScreen");
-        }
+        await signIn("google");
+        navigation.navigate("NotesDashboardScreen");
       } else if (authType === "apple") {
-        const { createdSessionId, setActive } = await startAppleAuthFlow();
-        if (createdSessionId) {
-          setActive({ session: createdSessionId });
-          navigation.navigate("NotesDashboardScreen");
-        }
+        await signIn("apple");
+        navigation.navigate("NotesDashboardScreen");
       }
     } catch (err) {
       console.error("OAuth error", err);
