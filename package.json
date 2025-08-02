@@ -4,6 +4,11 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "build:web": "turbo run build --filter=web-app",
+    "build:desktop": "turbo run build --filter=desktop",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "test": "echo 'No tests configured yet'",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
@@ -16,7 +21,8 @@
   },
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "common/*"
   ],
   "packageManager": "yarn@1.22.19"
 }

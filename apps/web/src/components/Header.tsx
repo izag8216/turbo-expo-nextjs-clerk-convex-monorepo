@@ -4,7 +4,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "./common/Logo";
 import Link from "next/link";
-import { useUser } from "@clerk/clerk-react";
+import { useCurrentUser } from "@indiestack/auth";
 import { UserNav } from "./common/UserNav";
 import { usePathname } from "next/navigation";
 
@@ -20,7 +20,7 @@ const navigation: NavigationItem[] = [
 ];
 
 export default function Header() {
-  const { user } = useUser();
+  const user = useCurrentUser();
   const pathname = usePathname();
 
   return (
@@ -66,9 +66,9 @@ export default function Header() {
                       </button>
                     </Link>
                     <UserNav
-                      image={user?.imageUrl}
-                      name={user?.fullName!}
-                      email={user?.primaryEmailAddress?.emailAddress!}
+                      image={user?.image || "/images/profile.png"}
+                      name={user?.name || "User"}
+                      email={user?.email || ""}
                     />
                   </div>
                 ) : (

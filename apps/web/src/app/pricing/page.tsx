@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCurrentUser } from "@convex-dev/auth/react";
+import { useCurrentUser } from "@indiestack/auth";
 import { createCheckoutSession, redirectToCheckout } from "@indiestack/subscription";
 import { SUBSCRIPTION_PLANS } from "@indiestack/config";
 
@@ -68,7 +68,7 @@ export default function PricingPage() {
               </div>
               <div className="pt-6 pb-8 px-6">
                 <h4 className="text-xs font-medium text-gray-900 tracking-wide uppercase">
-                  What's included
+                  What&apos;s included
                 </h4>
                 <ul className="mt-6 space-y-4">
                   {plan.features.map((feature) => (

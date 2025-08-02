@@ -30,7 +30,9 @@ export function UserNav({
           <Avatar className="h-10 w-10">
             <AvatarImage src={image} alt={name} />
             <AvatarFallback>
-              <img src={"/images/profile.png"} alt={name} />
+              <div className="w-full h-full bg-gray-300 rounded-full flex items-center justify-center text-gray-600 text-sm">
+                {name?.charAt(0)?.toUpperCase() || "U"}
+              </div>
             </AvatarFallback>
           </Avatar>
         </Button>
